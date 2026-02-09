@@ -195,6 +195,10 @@ def parse_date_time(text: str, op_date: date):
         text_date = parts[0].strip()
         text_time = parts[1].strip()
 
+    else:
+        text_time = text
+        text_date = ""
+
     t = _parse_time(text_time)
     d = _parse_date(text_date, op_date)
 
