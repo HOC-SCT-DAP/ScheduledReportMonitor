@@ -793,19 +793,23 @@ def match_order_papers_to_reports(order_papers: List[Dict[str, str]],
 
             if pub_date_str and pub_time_str:
                 try:
-                    # Parse publication datetime
+                # Parse publication datetime
                     pub_datetime = datetime.strptime(f"{pub_date_str} {pub_time_str}", '%Y-%m-%d %H:%M:%S')
 
                     if now > pub_datetime:
                         op_row['HC matched'] = 'Missing'
+                        message = ";".join(op_row.values())
                         response = requests.post("https://api.pushover.net/1/messages.json", data={
                             "token": os.environ['PUSH_API_TOKEN'],
                             "user": os.environ['PUSH_USER_KEY'], 
-                            "message": ";".join(op_row),
+                            "message": message,
                             "priority": 2,  # Emergency - will make noise until acknowledged
-                            "retry": 10,
+                            "retry": 30,
                             "expire": 300  # 5 minutes for testing
                         })
+                        print(message)
+                        print(f"Status: {response.status_code}")
+                        print(f"Response: {response.json()}")
                     else:
                         op_row['HC matched'] = 'Due'
                 except ValueError:
