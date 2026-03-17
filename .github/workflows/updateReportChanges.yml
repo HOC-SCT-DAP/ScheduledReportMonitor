@@ -1,7 +1,7 @@
 name: Update Report Monitor
 
 on:
-  schedule:
+  # schedule:
     # Run every day at 00:05 UTC
     # - cron: '5 0 * * *'
     # - cron: '5 9 * * *'
