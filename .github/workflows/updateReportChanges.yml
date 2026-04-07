@@ -2,7 +2,7 @@ name: Update Report Monitor
 
 on:
   repository_dispatch:
-    types: [cron_trigger]
+    types: [cron-trigger]
   workflow_dispatch:  # Allows manual trigger from GitHub UI
 
 jobs:
