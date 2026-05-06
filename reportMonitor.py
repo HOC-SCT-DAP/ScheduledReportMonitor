@@ -5,9 +5,10 @@ import json
 import os
 import re
 import urllib.request
-from datetime import datetime, date, time
+from datetime import datetime, date, time, timezone
 from time import sleep
 from typing import Dict, List, Optional, Tuple, Union
+import zoneinfo
 
 import requests
 from lxml import html
@@ -924,7 +925,7 @@ if __name__ == '__main__' and test_mode == False:
     all_reports.extend(new_reports)
 
     # Add scan record
-    scan_datetime = datetime.now()
+    scan_datetime = datetime.now(tz=zoneinfo.ZoneInfo("Europe/London"))
     scan_record = {
         'Scan date': scan_datetime.strftime('%Y-%m-%d'),
         'Scan time': scan_datetime.strftime('%H:%M:%S'),
